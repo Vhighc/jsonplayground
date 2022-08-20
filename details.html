@@ -1,0 +1,46 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>JSON Server</title>
+</head>
+
+<body>
+
+  <!-- <div id="welcome"></div>
+  <form>
+    <input type="text" placeholder="Search..." id="name" />
+    <input type="button" value="search" onClick="write_name();">
+  </form> -->
+
+  <h1 class="account">Account Info</h1>
+
+  <div id="tabs">
+    <button class="btn active tablinks"  onclick="opentab(event, 'profile')" id="defaultOpen">Profile Info</button>
+    <button class="btn tablinks"  onclick="opentab(event, 'posts')">Posts</button>
+    <button class="btn tablinks"  onclick="opentab(event, 'albums')">Albums</button>
+    <button class="btn tablinks" onclick="opentab(event, 'todos')">Todos</button>
+  </div>
+
+  <div id="profile" class="tabcontent">
+    <h2>User Information</h2>
+    <div class="details"></div>
+  </div>
+  <div id="post" class="tabcontent">
+    <h2>Posts</h2>
+    <div class="details"></div>
+  </div>
+  <div id="album" class="tabcontent">
+    <h2>Albums</h2>
+    <div class="details"></div>
+  </div>
+  <div id="todo" class="tabcontent">
+    <h2>Todos</h2>
+    <div class="details"></div>
+  </div>
+  <script src="js/details.js"></script>
+</body>
+
+</html>
