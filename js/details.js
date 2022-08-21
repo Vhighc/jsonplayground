@@ -1,21 +1,22 @@
 // javascript for details.html
+
 const id = new URLSearchParams(window.location.search).get('id');
 const container = document.querySelector('.details');
-const deleteBtn = document.querySelector('.delete');
+const contain = document.querySelector('.posts');
+
+// const deleteBtn = document.querySelector('.delete');
 // const baseUrl = 'https://jsonplaceholder.typicode.com';
 
 const renderDetails = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com/users/' + id);
 
-  // const res = await fetch(`${baseUrl}/posts=${id}`);
   // let uri = 'https://jsonplaceholder.typicode.com/users?_embed=posts';
-  // const result = await fetch(`${baseUrl}/users?userId=${id}`);
-  // const res = await fetch('https://jsonplaceholder.typicode.com/users' + id);
 
   if (!res.ok) {
     window.location.replace(`/details.html?id=${user.id}`);
   }
   const post = await res.json();
+
   console.log(post);
 
   const template =
@@ -52,25 +53,28 @@ var btns = header.getElementsByClassName("btn");
 
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", function () {
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
+    var current = document.getElementsByClassName("act");
+    current[0].className = current[0].className.replace(" act", "");
+    this.className += " act";
   });
 }
 
-// function todos() {
-//   var welcome = document.getElementById("preinfo");
-//   // var name = document.getElementById("name");
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
 
-//   welcome = "";
-// }
+document.getElementById("defaultOpen").click();
 
-// function write_name() {
-//   var welcomeParra = document.getElementById("welcome");
-//   var name = document.getElementById("name");
-
-//   welcomeParra.innerHTML = "welcome" + name.value;
-// }
 
 // deleteBtn.addEventListener('click', async () => {
 //   const res = await fetch('http://localhost:3000/posts/' + id, {
@@ -79,7 +83,50 @@ for (var i = 0; i < btns.length; i++) {
 //   window.location.replace("/");
 // })
 
+// const renderPosts = async () => {
+//   const res = await fetch('https://jsonplaceholder.typicode.com/users?_embed=posts' + id);
+
+//   // let uri = 'https://jsonplaceholder.typicode.com/users?_embed=posts';
+
+//   if (!res.ok) {
+//     window.location.replace(`/details.html?id=${user.id}`);
+//   }
+//   const post = await res.json();
+
+//   console.log(post);
+
+//   const template =
+//     `
+//     h2>${post.name}</h2>
+//     <p>${post.phone}</p>
+//   `;
+//   container.innerHTML = template;
+// }
+
 window.addEventListener('DOMContentLoaded', renderDetails);
+
+const renderPosts = async () => {
+  const res = await fetch('https://jsonplaceholder.typicode.com/users?_embed=posts' + id);
+  // let uri = 'https://jsonplaceholder.typicode.com/users?_embed=posts/id';
+
+  // const res = await fetch(uri);
+  const users = await res.json();
+  console.log(users);
+
+  let temp = '';
+  users.forEach(user => {
+    temp += `
+      <div class="posts">
+        <h2>${user.posts.title}</h2>
+        <a href="/details.html?id=${user.id}">Read more</a>
+      </div>
+    `
+  });
+
+  contain.innerHTML = temp;
+}
+
+window.addEventListener('DOMContentLoaded', renderPosts);
 
 
 

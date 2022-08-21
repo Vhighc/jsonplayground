@@ -1,18 +1,10 @@
-// javascript for index.html
+
 const container = document.querySelector('.blogs');
 const searchForm = document.querySelector('.search');
 const date = document.querySelector(".time");
-// const myDiv = document.getElementById("myDiv");
 
-// myDiv.dataset.name="John";
-// myDiv.dataset.startedCodingAt="8";
-// myDiv.dataset.name="";
-// myDiv.removeAttribute('data-name')
-// console.log(myDiv.dataset)
-
-const renderPosts = async (term) => {
+const renderUsers = async (term) => {
   console.log(term);
-  // let uri = 'https://jsonplaceholder.typicode.com/users?_embed=posts';
   let uri = 'https://jsonplaceholder.typicode.com/users';
   if (term) {
     uri += `&q=${term}`
@@ -35,13 +27,11 @@ const renderPosts = async (term) => {
   container.innerHTML = template;
 }
 
-// anchorElement.setAttribute('href', `${apiUrl}/users/${user.id}`);
-
 // search
-searchForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  renderPosts(searchForm.term.value.trim());
-})
+// searchForm.addEventListener('submit', async (e) => {
+//   e.preventDefault();
+//   renderUsers(searchForm.term.value.trim());
+// })
 
 const dateTime = () => {
   const day = new Date().toLocaleString("en-Uk", {
@@ -62,5 +52,5 @@ setInterval(() => {
 }, 1000);
 date.textContent = dateTime();
 
-window.addEventListener('DOMContentLoaded', () => renderPosts());
+window.addEventListener('DOMContentLoaded', () => renderUsers());
 
