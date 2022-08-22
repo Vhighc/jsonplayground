@@ -1,22 +1,18 @@
-
 const id = new URLSearchParams(window.location.search).get('id');
 const containForm = document.querySelector('.details');
 const containPosts = document.querySelector('.postinfo');
+const containAlbums = document.querySelector('.allalbums');
+const containTodos = document.querySelector('.alltodos');
 const uri = 'https://jsonplaceholder.typicode.com';
 
 
-
 const renderDetails = async () => {
-
   const res = await fetch(`${uri}/users/${id}?_embed=posts`);
-
   if (!res.ok) {
     window.location.replace(`/details.html?id=${user.id}`);
   }
   const info = await res.json();
-  
   console.log(info);
-
   const form =
     `
     <form>
@@ -47,20 +43,58 @@ const renderDetails = async () => {
   info.posts.forEach(post => {
     
     allPost += `
-        <div class="pos">
           <h4>${post.title}</h4>
           <p>${post.body}</p>
-          </div>
           `
   });
-
   containPosts.innerHTML = allPost;
   containForm.innerHTML = form;
 }
 
+
+const renderAlbums = async () => {
+
+  const res = await fetch(`${uri}/users/${id}?_embed=albums`);
+
+  const getAlbums = await res.json();
+  
+  console.log(getAlbums);
+
+  let allbum = '';
+  getAlbums.albums.forEach(album => {
+    
+    allbum += `
+          <h4>${album.title}</h4>
+          `
+  });
+
+  containAlbums.innerHTML = allbum;
+}
+
+
+const renderTodos = async () => {
+
+  const res = await fetch(`${uri}/users/${id}?_embed=todos`);
+
+  const getTodos = await res.json();
+  
+  console.log(getTodos);
+
+  let allTodos = '';
+  getTodos.todos.forEach(todo => {
+    
+    allTodos += `
+          <h4>${todo.title}</h4>
+          <p>${todo.completed}</p>
+          `
+  });
+
+  containTodos.innerHTML = allTodos;
+}
+
+
 var header = document.getElementById("tabs");
 var btns = header.getElementsByClassName("btn");
-
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", function () {
     var current = document.getElementsByClassName("act");
@@ -68,6 +102,7 @@ for (var i = 0; i < btns.length; i++) {
     this.className += " act";
   });
 }
+
 
 function openTab(evt, tabName) {
   var i, tabcontent, tablinks;
@@ -82,11 +117,12 @@ function openTab(evt, tabName) {
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
 }
-
 document.getElementById("defaultOpen").click();
 
 
 window.addEventListener('DOMContentLoaded', renderDetails);
+window.addEventListener('DOMContentLoaded', renderAlbums);
+window.addEventListener('DOMContentLoaded', renderTodos);
 
 
 
