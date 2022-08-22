@@ -19,7 +19,7 @@
 
   <div id="tabs">
     <button class="btn act tablinks"  onclick="openTab(event, 'profile')" id="defaultOpen">Profile Info</button>
-    <button class="btn tablinks"  onclick="openTab(event, 'post')">Posts</button>
+    <button data-id="" class="btn tablinks"  onclick="openTab(event, 'post')">Posts</button>
     <button class="btn tablinks"  onclick="openTab(event, 'album')">Albums</button>
     <button class="btn tablinks" onclick="openTab(event, 'todo')">Todos</button>
   </div>
@@ -30,6 +30,7 @@
   </div>
   <div id="post" class="tabcontent">
     <h2>Posts</h2>
+    <div class="postinfo"></div>
   </div>
   <div id="album" class="tabcontent">
     <h2>Albums</h2>
