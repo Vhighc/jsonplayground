@@ -45,6 +45,7 @@ const renderDetails = async () => {
     allPost += `
           <h4>${post.title}</h4>
           <p>${post.body}</p>
+          <a href="/create.html?id=${post.id}">View Comments</a>
           `
   });
   containPosts.innerHTML = allPost;

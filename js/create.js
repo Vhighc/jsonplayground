@@ -1,22 +1,25 @@
-// javascript for create.html
-const form = document.querySelector('form');
+const containComments = document.querySelector('.comments');
+const id = new URLSearchParams(window.location.search).get('id');
+const uri = 'https://jsonplaceholder.typicode.com';
 
-const createPost = async (e) => {
-  e.preventDefault();
+const renderComments = async () => {
+  const res = await fetch(`${uri}/posts/${id}?_embed=comments`);
+  // if (!res.ok) {
+  //   window.location.replace(`/details.html?id=${user.id}`);
+  // }
+  const postComments = await res.json();
+  console.log(postComments);
 
-  const doc = {
-    title: form.title.value,
-    body: form.body.value,
-    likes: 0,
-  }
-
-  await fetch('http://localhost:3000/posts', {
-    method: 'POST',
-    body: JSON.stringify(doc),
-    headers: { 'Content-Type': 'application/json' }
-  })
-
-  window.location.replace('/')
+  let allComments = '';
+  postComments.comments.forEach(comment => {
+    
+    allComments += `
+    <h4>${comment.email}</h4>
+    <p>${comment.name}</p>
+    <p>${comment.body}</p>
+    `
+  });
+  containComments.innerHTML = allComments;
 }
+window.addEventListener('DOMContentLoaded', renderComments);
 
-form.addEventListener('submit', createPost);
