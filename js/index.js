@@ -14,6 +14,8 @@ const renderUsers = async (term) => {
   const users = await res.json();
   console.log(users);
 
+
+  
   let template = '';
   users.forEach(user => {
     template += `

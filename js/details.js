@@ -16,17 +16,22 @@ const renderDetails = async () => {
   const form =
     `
     <form>
-    <label>Full name</label>
+    <label>Full name
     <input type="text" name="name" id="name" value="${info.name}" placeholder="Name" required>
-    <label>Phone Number</label>
+    </label>
+    <label>Phone Number
     <input type="text" placeholder="Enter your Last name" value="${info.phone}">
-    <label>Email</label>
+    </label>
+    <label>Email
     <input type="text" name="name" id="name" value="${info.email}" placeholder="Name" required>
-    <label>Website</label>
+    </label>
+    <label>Website
     <input type="text" placeholder="Enter your Last name" value="${info.website}">
-    <label>Username</label>
+    </label>
+    <label>Username
     <input type="text" name="name" id="name" value="${info.username}" placeholder="Name" required>
-    <h1>Address</h1>
+    </label>
+    <h2>Address</h2>
     <label>Address line 1</label>
     <input type="text" placeholder="Enter your Last name" value="${info.address.geo.lat} ${info.address.geo.lng}">
     <label>Address line 2</label>
@@ -45,7 +50,7 @@ const renderDetails = async () => {
     allPost += `
           <h4>${post.title}</h4>
           <p>${post.body}</p>
-          <a href="/create.html?id=${post.id}">View Comments</a>
+          <a href="/comment.html?id=${post.id}">View Comments</a> 
           `
   });
   containPosts.innerHTML = allPost;
@@ -66,6 +71,7 @@ const renderAlbums = async () => {
     
     allbum += `
           <h4>${album.title}</h4>
+          <a href="/photo.html?id=${album.id}">View photos</a>
           `
   });
 
@@ -121,10 +127,32 @@ function openTab(evt, tabName) {
 document.getElementById("defaultOpen").click();
 
 
+
 window.addEventListener('DOMContentLoaded', renderDetails);
 window.addEventListener('DOMContentLoaded', renderAlbums);
 window.addEventListener('DOMContentLoaded', renderTodos);
 
+// let popup = document.getElementById("pop");
+// function openPopup(){
+    // popup.classList.add("open-popup");
+// }
+// function closePopup(){
+    // popup.classList.remove("open-popup");
+// }
+
+// const modal = document.querySelector('#modal');
+// const openModal = document.querySelector('.open-button');
+// const closeModal = document.querySelector('.close-button');
+
+// openModal.addEventListener('click', () =>{
+//     // modal.show();
+//     modal.showModal();
+// })
+
+// closeModal.addEventListener('click', () =>{
+//     // modal.show();
+//     modal.close();
+// })
 
 
 
@@ -230,3 +258,5 @@ window.addEventListener('DOMContentLoaded', renderTodos);
 // window.addEventListener('DOMContentLoaded', renderPosts);
 
 
+{/* <a href="/comment.html?id=${post.id}">View Comments</a> */}
+{/* <button type="submit" id=${post.id}  onclick="openPopup()">View Comments</button> */}
